@@ -1,0 +1,41 @@
+[
+  {
+    "homeName": "Cozy Cottage in the Mountains",
+    "location": "Aspen, Colorado",
+    "checkInDate": "April 15, 2026",
+    "checkOutDate": "April 22, 2026",
+    "nights": 7,
+    "guests": 2,
+    "pricePerNight": 150,
+    "totalPrice": 1050,
+    "homeImage": "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg",
+    "bookingDate": "March 20, 2026",
+    "status": "Confirmed"
+  },
+  {
+    "homeName": "Beachside Villa with Ocean View",
+    "location": "Malibu, California",
+    "checkInDate": "May 5, 2026",
+    "checkOutDate": "May 12, 2026",
+    "nights": 7,
+    "guests": 4,
+    "pricePerNight": 250,
+    "totalPrice": 1750,
+    "homeImage": "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg",
+    "bookingDate": "March 15, 2026",
+    "status": "Confirmed"
+  },
+  {
+    "homeName": "Modern City Apartment",
+    "location": "New York City, New York",
+    "checkInDate": "August 1, 2026",
+    "checkOutDate": "August 8, 2026",
+    "nights": 7,
+    "guests": 2,
+    "pricePerNight": 200,
+    "totalPrice": 1400,
+    "homeImage": "https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg",
+    "bookingDate": "March 10, 2026",
+    "status": "Confirmed"
+  }
+]

@@ -1,0 +1,214 @@
+<%- include('../partials/head', { pageTitle: 'My Favourites' }) %>
+</head>
+<body class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
+  <!-- Navbar -->
+  <%- include('../partials/Navbar') %>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Header Section -->
+    <div class="mb-12">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">My Favourites</h1>
+      <p class="text-xl text-gray-600">Your curated collection of favourite homes and experiences</p>
+    </div>
+
+    <!-- Filter and Sort Section -->
+    <div class="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between bg-white rounded-lg p-4 shadow-sm">
+      <div class="flex gap-3 flex-wrap">
+        <button class="px-4 py-2 bg-red-500 text-white rounded-full font-semibold hover:bg-red-600 transition">
+          All
+        </button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-full font-semibold hover:bg-gray-300 transition">
+          Mountain
+        </button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-full font-semibold hover:bg-gray-300 transition">
+          Beach
+        </button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded-full font-semibold hover:bg-gray-300 transition">
+          City
+        </button>
+      </div>
+      
+      <select class="px-4 py-2 border border-gray-300 rounded-lg font-semibold cursor-pointer hover:border-gray-400 transition">
+        <option>Sort by: Latest Added</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Rating: Highest</option>
+      </select>
+    </div>
+
+    <!-- Favourites Container -->
+    <section>
+      <!-- Favourites Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Favourite Card 1 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          
+          <!-- Image Section -->
+          <div class="relative overflow-hidden bg-gray-200 h-56">
+            <img src="https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg" 
+                 alt="Cozy Cottage" 
+                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+            <div class="absolute top-3 right-3">
+              <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition transform hover:scale-110">
+                ❤️
+              </button>
+            </div>
+            <div class="absolute bottom-3 left-3 bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+              ⭐ 4.8 (124 reviews)
+            </div>
+          </div>
+          
+          <!-- Content Section -->
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-1">Cozy Cottage in Mountains</h3>
+            <p class="text-gray-600 text-sm mb-3">📍 Aspen, Colorado</p>
+            
+            <!-- Home Type Badge -->
+            <div class="mb-3 inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+              🏔️ Mountain Home
+            </div>
+
+            <!-- Price Section -->
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-gray-600 text-sm">From</p>
+                <p class="text-2xl font-bold text-gray-900">$150<span class="text-lg text-gray-600">/night</span></p>
+              </div>
+              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg transition transform hover:scale-105">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Favourite Card 2 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          
+          <!-- Image Section -->
+          <div class="relative overflow-hidden bg-gray-200 h-56">
+            <img src="https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg" 
+                 alt="Beachside Villa" 
+                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+            <div class="absolute top-3 right-3">
+              <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition transform hover:scale-110">
+                ❤️
+              </button>
+            </div>
+            <div class="absolute bottom-3 left-3 bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+              ⭐ 4.9 (98 reviews)
+            </div>
+          </div>
+          
+          <!-- Content Section -->
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-1">Beachside Villa with Ocean View</h3>
+            <p class="text-gray-600 text-sm mb-3">📍 Malibu, California</p>
+            
+            <!-- Home Type Badge -->
+            <div class="mb-3 inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+              🏖️ Beach Home
+            </div>
+
+            <!-- Price Section -->
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-gray-600 text-sm">From</p>
+                <p class="text-2xl font-bold text-gray-900">$250<span class="text-lg text-gray-600">/night</span></p>
+              </div>
+              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg transition transform hover:scale-105">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Favourite Card 3 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          
+          <!-- Image Section -->
+          <div class="relative overflow-hidden bg-gray-200 h-56">
+            <img src="https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/12/15/Pictures/_9f2b6346-ffd3-11e8-9457-b1b429387a4e.jpg" 
+                 alt="Modern City Apartment" 
+                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+            <div class="absolute top-3 right-3">
+              <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg transition transform hover:scale-110">
+                ❤️
+              </button>
+            </div>
+            <div class="absolute bottom-3 left-3 bg-yellow-400 text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+              ⭐ 4.7 (156 reviews)
+            </div>
+          </div>
+          
+          <!-- Content Section -->
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800 mb-1">Modern City Apartment</h3>
+            <p class="text-gray-600 text-sm mb-3">📍 New York City, New York</p>
+            
+            <!-- Home Type Badge -->
+            <div class="mb-3 inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+              🏙️ City Apartment
+            </div>
+
+            <!-- Price Section -->
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-gray-600 text-sm">From</p>
+                <p class="text-2xl font-bold text-gray-900">$200<span class="text-lg text-gray-600">/night</span></p>
+              </div>
+              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg transition transform hover:scale-105">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section class="mt-16 bg-white rounded-2xl shadow-lg p-8 md:p-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">Recommendations for You</h2>
+      <p class="text-gray-600 mb-8">Based on your favourite selections, you might also love these properties:</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Recommendation 1 -->
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-red-300 hover:shadow-md transition cursor-pointer">
+          <div class="bg-gradient-to-br from-purple-400 to-pink-400 h-40 rounded-lg mb-3"></div>
+          <h4 class="font-bold text-gray-800 mb-1">Alpine Chalet</h4>
+          <p class="text-sm text-gray-600 mb-3">Swiss Alps, Switzerland</p>
+          <p class="text-lg font-bold text-gray-900">$180/night</p>
+        </div>
+
+        <!-- Recommendation 2 -->
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-red-300 hover:shadow-md transition cursor-pointer">
+          <div class="bg-gradient-to-br from-green-400 to-teal-400 h-40 rounded-lg mb-3"></div>
+          <h4 class="font-bold text-gray-800 mb-1">Tropical Villa</h4>
+          <p class="text-sm text-gray-600 mb-3">Bali, Indonesia</p>
+          <p class="text-lg font-bold text-gray-900">$190/night</p>
+        </div>
+
+        <!-- Recommendation 3 -->
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-red-300 hover:shadow-md transition cursor-pointer">
+          <div class="bg-gradient-to-br from-yellow-400 to-orange-400 h-40 rounded-lg mb-3"></div>
+          <h4 class="font-bold text-gray-800 mb-1">Desert Oasis</h4>
+          <p class="text-sm text-gray-600 mb-3">Dubai, UAE</p>
+          <p class="text-lg font-bold text-gray-900">$220/night</p>
+        </div>
+
+        <!-- Recommendation 4 -->
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-red-300 hover:shadow-md transition cursor-pointer">
+          <div class="bg-gradient-to-br from-blue-400 to-indigo-400 h-40 rounded-lg mb-3"></div>
+          <h4 class="font-bold text-gray-800 mb-1">Lake House</h4>
+          <p class="text-sm text-gray-600 mb-3">Lake Tahoe, California</p>
+          <p class="text-lg font-bold text-gray-900">$210/night</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
