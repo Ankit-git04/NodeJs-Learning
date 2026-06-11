@@ -1,6 +1,7 @@
 const {registeredHomes} = require('../models/home');
 const Home = require('../models/home');
 const Bookings= require('../models/bookings');
+const favourites = require('../models/favourites');
 
 
 exports.getHome=(req, res, next) => {
@@ -35,5 +36,17 @@ exports.postBookings=(req, res, next) => {
 };
 
 exports.getFavourites=(req, res, next) => {
-    res.render('store/favourites', { pageTitle: 'Your Favourites' });
+    favourites.fetchAllFavourites((favouriteHomes) => {
+        console.log(favouriteHomes);
+        res.render('store/favourites', { favouriteHomes: favouriteHomes });
+    });
+   
 };  
+
+exports.AddToFavourites=(req, res, next) => {
+    const homeid = req.params.homeid;       
+    const NewFavouriteHome = new favourites(homeid);
+    NewFavouriteHome.save();
+    
+    res.redirect('/favourites');
+};

@@ -12,7 +12,9 @@ storeRouter.get('/', homesController.getHome);
 
 storeRouter.get('/Homedetails/:homeid', homesController.getHomeDetails);
 
+
 storeRouter.get('/bookings',homesController.getBookings);
 storeRouter.post('/bookings/:homeid',homesController.postBookings);
 storeRouter.get('/favourites',homesController.getFavourites);
+storeRouter.post('/favourites/:homeid', homesController.AddToFavourites);
 exports.storeRouter = storeRouter;
