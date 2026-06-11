@@ -9,6 +9,16 @@ exports.getHome=(req, res, next) => {
     });
 };
 
+exports.getHomeDetails=(req, res, next) => {
+    const homeid = req.params.homeid;
+    Home.fetchById(homeid, (home) => {
+        if (!home) {
+            return res.status(404).render('404', { pageTitle: 'Home Not Found' });
+        }
+        res.render('store/homeDetails', { home: home });
+    });
+};
+
 exports.getBookings=(req, res, next) => {
   Bookings.fetchAllBookings((bookings) => {
     console.log(bookings);

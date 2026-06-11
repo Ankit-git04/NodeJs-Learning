@@ -56,6 +56,25 @@ module.exports=class Home{
        
     }
 
+    static fetchById(homeid, callback){
+        const filePath = path.join(rootDir, 'data', 'homes.json');
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                console.error('Error reading homes:', err);
+                return callback(null);
+            }
+             
+            try {
+                const homes = JSON.parse(data || '[]');
+                const home = homes.find(h => h.homeid === homeid);
+                callback(home || null);
+            } catch (error) {
+                console.error('Invalid JSON:', error);
+                callback(null);
+            }
+        });
+    }
+
 
 
 }
