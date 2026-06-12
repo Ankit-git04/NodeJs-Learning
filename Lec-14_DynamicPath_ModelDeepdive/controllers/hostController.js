@@ -26,17 +26,29 @@ exports.getEditHome=(req, res, next) => {
 exports.postEditHome=(req, res, next) => {
   const homeid = req.params.homeid;
   // Here you would normally handle the form data and update the home in the database
-     Home.editHome(homeid, req.body, () => {
-        res.redirect('/host');
-    });
+    Home.editHome(homeid, req.body, (success) => {
+    if (!success) {
+        console.error("Failed to update home");
+        return res.status(500).send("Failed to update home");
+    }
+
+    res.redirect('/host');
+});
 };
 
-exports.postDeleteHome=(req, res, next) => {
+exports.postDeleteHome = (req, res, next) => {
   const homeid = req.params.homeid;
-  // Here you would normally handle the deletion of the home from the database
-  console.log(`Deleting home with ID: ${homeid}`);
-  res.render('host/host-home-list', { pageTitle: 'Home Deleted' });
+
+  Home.DeleteHome(homeid, (success) => {
+    if (!success) {
+      console.error("Failed to delete home");
+      return res.status(500).send("Failed to delete home");
+    }
+
+    res.redirect('/host');
+  });
 };
+
 
 
 

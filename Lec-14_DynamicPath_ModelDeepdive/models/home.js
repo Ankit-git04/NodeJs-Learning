@@ -103,4 +103,30 @@ module.exports=class Home{
         });
     }
 
+
+
+    static DeleteHome(homeid, callback){
+        const filePath = path.join(rootDir, 'data', 'homes.json');  
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                console.error('Error reading homes:', err);
+                return callback(false);
+            }       
+            try {
+                const homes = JSON.parse(data || '[]');
+                const updatedHomes = homes.filter(h => h.homeid !== homeid);    
+                fs.writeFile(filePath, JSON.stringify(updatedHomes), (err) => {
+                    if (err) {
+                        console.error('Error deleting home:', err);
+                        return callback(false);
+                    }
+                    callback(true);
+                });
+            } catch (error) {
+                console.error('Invalid JSON:', error);
+                callback(false);
+            }
+        });
+    }
+
 }
