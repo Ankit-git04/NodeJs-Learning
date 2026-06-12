@@ -1,4 +1,4 @@
-  <%- include('../partials/head', { pageTitle: 'Airbnb' }) %>
+  <%- include('../partials/head', { pageTitle: 'Host Home' }) %>
   </head>
   <body class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen">
     <!-- Navbar --> 
@@ -36,14 +36,14 @@
           <!-- Homes Grid -->
           <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <% registeredHomes.forEach(home => { %>
-              <li class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <li class="p-6 bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 
                 <!-- Image Section -->
                 <div class="relative overflow-hidden bg-gray-200 h-48">
                   <img src="<%= home.imageUrl %>" 
                        alt="<%= home.homeName %>" 
                        class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
-                  <div class="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  <div class="absolute top-3 right-3 bg-amber-500 text-black px-3 py-1 rounded-full text-sm font-semibold">
                     $<%= home.price %>/night
                   </div>
                 </div>
@@ -59,14 +59,19 @@
                   </p>
 
                   <!-- Action Buttons -->
-                  <div class="flex gap-3">
-                    <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-3 rounded-lg transition transform hover:scale-105">
-                      ✏️ Edit
-                    </button>
-                    <button class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition transform hover:scale-105">
-                      🗑️ Delete
-                    </button>
-                  </div>
+                    <div class=" flex sm:flex-col gap-8">
+                      <form action="/host/edit-home/<%= home.homeid %>" method="GET" class="flex-1">
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-black font-semibold py-2 rounded-lg transition transform hover:scale-105">
+                          ✏️ Edit
+                        </button>
+                      </form>
+                     
+                      <form action="/host/delete-home/<%= home.homeid %>" method="POST" class="flex-1">
+                        <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition transform hover:scale-105">
+                          🗑️ Delete
+                        </button>
+                      </form>
+                    </div>
                 </div>
                 
               </li>

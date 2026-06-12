@@ -75,6 +75,32 @@ module.exports=class Home{
         });
     }
 
-
+    static editHome(homeid, updatedData, callback){
+        const filePath = path.join(rootDir, 'data', 'homes.json');
+        fs.readFile(filePath, (err, data) => {
+            if (err) {
+                console.error('Error reading homes:', err);
+                return callback(false);
+            }   
+            try {
+                const homes = JSON.parse(data || '[]');
+                const homeIndex = homes.findIndex(h => h.homeid === homeid);    
+                if (homeIndex === -1) {
+                    return callback(false);
+                }   
+                homes[homeIndex] = { ...homes[homeIndex], ...updatedData };
+                fs.writeFile(filePath, JSON.stringify(homes), (err) => {
+                    if (err) {
+                        console.error('Error updating home:', err);
+                        return callback(false);
+                    }   
+                    callback(true);
+                });
+            } catch (error) {
+                console.error('Invalid JSON:', error);
+                callback(false);
+            }
+        });
+    }
 
 }

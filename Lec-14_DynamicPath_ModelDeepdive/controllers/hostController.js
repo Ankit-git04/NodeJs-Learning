@@ -7,11 +7,39 @@ exports.getAddHome=(req, res, next) => {
 };
 
 
-exports.getHome=(req, res, next) => {
+exports.getHostHome=(req, res, next) => {
     Home.fetchAll((registeredHomes) => {
         res.render('host/host-home-list', { registeredHomes: registeredHomes });
     });
 };
+  
+exports.getEditHome=(req, res, next) => {
+  const homeid = req.params.homeid;
+  Home.fetchById(homeid, (home) => {
+    if (!home) {
+      return res.status(404).render('404', { pageTitle: 'Home Not Found' });
+    }
+    res.render('host/EditHome', { home: home, pageTitle: 'Edit Home' });
+  });
+};
+
+exports.postEditHome=(req, res, next) => {
+  const homeid = req.params.homeid;
+  // Here you would normally handle the form data and update the home in the database
+     Home.editHome(homeid, req.body, () => {
+        res.redirect('/host');
+    });
+};
+
+exports.postDeleteHome=(req, res, next) => {
+  const homeid = req.params.homeid;
+  // Here you would normally handle the deletion of the home from the database
+  console.log(`Deleting home with ID: ${homeid}`);
+  res.render('host/host-home-list', { pageTitle: 'Home Deleted' });
+};
+
+
+
 
   // This will store the registered homes in memory
 exports.postAddHome=(req, res, next) => {
@@ -21,5 +49,5 @@ exports.postAddHome=(req, res, next) => {
   console.log(homeName);
   const newHome = new Home(homeid, homeName, location, price, imageUrl);
   newHome.save();
-  res.render('host/HomeAdded', { pageTitle: 'Home Added' });
+  res.render('host/HomeAdded', { pageTitle: 'Home Added' }); 
 }
