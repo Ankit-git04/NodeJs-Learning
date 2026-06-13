@@ -50,3 +50,14 @@ exports.AddToFavourites=(req, res, next) => {
     
     res.redirect('/favourites');
 };
+
+exports.RemoveFromFavourites=(req, res, next) => {
+    const homeid = req.params.homeid;
+    const RemovedFromFavourites = favourites.RemoveFromFavourites(homeid, (success) => {
+        if (!success) {
+            console.error("Failed to remove from favourites");
+            return res.status(500).send("Failed to remove from favourites");
+        }
+        res.redirect('/favourites');
+    });
+};      

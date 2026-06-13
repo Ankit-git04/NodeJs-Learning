@@ -48,4 +48,33 @@ module.exports = class favourites {
       } 
     });
   }
+   
+  static RemoveFromFavourites(homeid, callback) {
+    const filePath = path.join(rootDir, "data", "favourites.json"); 
+    fs.readFile(filePath, (err, data) => {
+      if (err) {
+        console.error("Error reading favourites:", err);
+        return callback(false);
+      }   
+      try {
+        let favourites = JSON.parse(data || "[]");
+        favourites = favourites.filter((favourite) => favourite.homeid !== homeid); 
+        fs.writeFile(filePath, JSON.stringify(favourites), (err) => {
+          if (err) {
+            console.error("Error updating favourites:", err);
+            return callback(false);
+          } 
+          console.log("Favourite removed successfully!");
+          callback(true);
+        });
+      } catch (error) {
+        console.error("Invalid JSON:", error);
+        callback(false);
+      } 
+    }); }
+
+
+
+
+ 
 };

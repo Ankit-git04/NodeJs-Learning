@@ -17,4 +17,6 @@ storeRouter.get('/bookings',homesController.getBookings);
 storeRouter.post('/bookings/:homeid',homesController.postBookings);
 storeRouter.get('/favourites',homesController.getFavourites);
 storeRouter.post('/favourites/:homeid', homesController.AddToFavourites);
+storeRouter.post('/favourites/delete/:homeid', homesController.RemoveFromFavourites);
+
 exports.storeRouter = storeRouter;
