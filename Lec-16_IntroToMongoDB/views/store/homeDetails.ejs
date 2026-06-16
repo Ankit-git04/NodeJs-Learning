@@ -1,0 +1,125 @@
+<%- include('../partials/head', { pageTitle: home.homeName }) %>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Navbar -->
+  <%- include('../partials/Navbar') %>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+   
+
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+     
+      <!-- Content Section -->
+      <div class="p-8">
+
+         <!-- Image Section -->
+      <div class="w-full h-80 bg-gray-200 overflow-hidden">
+        <img src="<%= home.imageUrl %>" alt="<%= home.homeName %>" class="w-full h-full object-cover" />
+      </div>
+cd
+        <!-- Title and Price -->
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900"><%= home.homeName %></h1>
+            <p class="text-gray-600 mt-1 flex items-center text-sm">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"></path>
+              </svg>
+              <%= home.location %>
+            </p>
+          </div>
+          <div class="text-right">
+            <p class="text-gray-600 text-sm">Price per night</p>
+            <p class="text-3xl font-bold text-red-500">$<%= home.price %></p>
+          </div>
+        </div>
+
+        <hr class="mb-6">
+
+        <!-- Key Info -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+          <div>
+            <p class="text-gray-600 text-xs uppercase tracking-wide">Location</p>
+            <p class="text-gray-900 font-semibold mt-1"><%= home.location %></p>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs uppercase tracking-wide">Price/Night</p>
+            <p class="text-gray-900 font-semibold mt-1">$<%= home.price %></p>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs uppercase tracking-wide">Rating</p>
+            <p class="text-gray-900 font-semibold mt-1">4.8 ★</p>
+          </div>
+          <div>
+            <p class="text-gray-600 text-xs uppercase tracking-wide">Availability</p>
+            <p class="text-green-600 font-semibold mt-1">Available</p>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-8">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">About This Home</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">
+            Welcome to this beautiful home in <%= home.location %>! This wonderful property offers comfort and convenience for your stay. Located in a prime area with easy access to attractions, restaurants, and shopping. The property is well-maintained, fully equipped with modern amenities, and the owner is responsive to guest needs.
+          </p>
+        </div>
+
+        <!-- Features -->
+        <div class="mb-8">
+          <h3 class="text-lg font-bold text-gray-900 mb-3">Features</h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="flex items-start">
+              <svg class="w-4 h-4 mr-2 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+              </svg>
+              <span class="text-sm text-gray-700">Professional Photos</span>
+            </div>
+            <div class="flex items-start">
+              <svg class="w-4 h-4 mr-2 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+              </svg>
+              <span class="text-sm text-gray-700">Verified Listing</span>
+            </div>
+            <div class="flex items-start">
+              <svg class="w-4 h-4 mr-2 text-red-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
+              </svg>
+              <span class="text-sm text-gray-700">Safe & Secure</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-4">
+          <form action="/bookings/<%= home.homeid %>" method="POST" class="flex-1">
+            <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition text-sm">
+              Book Now
+            </button>
+          </form>
+          <form action="/favourites/<%= home.homeid %>" method="POST" class="flex-1">
+              <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition transform hover:scale-105">
+                Add to Favourites
+              </button>
+            </form>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="mt-8 pt-8 border-t border-gray-200">
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Questions?</h3>
+          <p class="text-gray-600 text-sm mb-4">Contact the host for more information about this property.</p>
+          <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition text-sm">
+            Contact Host
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-6 mt-12">
+    <div class="max-w-5xl mx-auto px-4 text-center text-sm">
+      <p>&copy; 2024 Airbnb Clone. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
