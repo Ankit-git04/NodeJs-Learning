@@ -1,11 +1,11 @@
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
+require('dotenv').config();
 
-const mongo_url = 
-'mongodb+srv://anky_04:mongodb%40123@airbnb.mvprmaz.mongodb.net/airbnb?retryWrites=true&w=majority ';
+const mongo_url = process.env.MONGODB_URL;
 
 let _db;
-
+   console.log("Mongo URL:", mongo_url);
 const mongoClient = (callback)=>{
       MongoClient.connect(mongo_url).then((client)=>{
 

@@ -1,6 +1,13 @@
+
+require('dotenv').config();
+
 const express = require("express");
-const app = express();
 const path = require('path');
+
+const app = express();
+
+
+
 
 const {storeRouter} = require('./routes/storeRouter');
 const {hostRouter} = require('./routes/hostRouter');
