@@ -60,13 +60,13 @@
 
                   <!-- Action Buttons -->
                     <div class=" flex sm:flex-col gap-8">
-                      <form action="/host/edit-home/<%= home.homeid %>" method="GET" class="flex-1">
+                      <form action="/host/edit-home/<%= home._id %>" method="GET" class="flex-1">
                         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-black font-semibold py-2 rounded-lg transition transform hover:scale-105">
                           ✏️ Edit
                         </button>
                       </form>
                      
-                      <form action="/host/delete-home/<%= home.homeid %>" method="POST" class="flex-1">
+                      <form action="/host/delete-home/<%= home._id %>" method="POST" class="flex-1">
                         <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition transform hover:scale-105">
                           🗑️ Delete
                         </button>

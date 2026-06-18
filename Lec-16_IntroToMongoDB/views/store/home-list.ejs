@@ -45,13 +45,13 @@
 
         <li class="p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 flex flex-col">
 
-          <a href="Homedetails/<%= home.homeid %>" class="block mb-3">
+          <a href="Homedetails/<%= home._id %>" class="block mb-3">
             <img src="<%= home.imageUrl %>" 
                  alt="<%= home.homeName %>" 
                  class="w-full h-40 object-cover rounded-md hover:opacity-80 transition duration-200">
           </a>
 
-          <a href="Homedetails/<%= home.homeid %>" class="text-lg font-semibold text-gray-800 hover:text-red-500 transition">
+          <a href="Homedetails/<%= home._id %>" class="text-lg font-semibold text-gray-800 hover:text-red-500 transition">
             <%= home.homeName %>
           </a>
 
@@ -66,18 +66,18 @@
           <div class="flex gap-2 mt-auto">
            
             <a
-                  href="/Homedetails/<%= home.homeid %>"
+                  href="/Homedetails/<%= home._id %>"
                   class="flex-1 text-center bg-blue-300 hover:bg-green-400 text-gray-800 hover:text-white font-bold py-2 px-4 rounded-lg transition transform hover:scale-105"
                 >
                   View Details
                 </a>
            
-            <form action="/bookings/<%= home.homeid %>" method="POST" class="flex-1">
+            <form action="/bookings/<%= home._id %>" method="POST" class="flex-1">
               <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition transform hover:scale-105">
                 Book Now
               </button>
             </form>
-            <form action="/favourites/<%= home.homeid %>" method="POST" class="flex-1">
+            <form action="/favourites/<%= home._id %>" method="POST" class="flex-1">
               <button type="submit"  type="submit"  class="w-full whitespace-nowrap bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-2 rounded-lg">
                 Add to Favourites
                     </button>

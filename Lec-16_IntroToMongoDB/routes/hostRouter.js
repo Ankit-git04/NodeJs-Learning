@@ -10,8 +10,8 @@ hostRouter.get('/', hostController.getHostHome);
 hostRouter.get('/add-home',  hostController.getAddHome);
 hostRouter.post('/add-home', hostController.postAddHome);
 
-hostRouter.get('/edit-home/:homeid', hostController.getEditHome);
-hostRouter.post('/edit-home/:homeid', hostController.postEditHome);
-hostRouter.post('/delete-home/:homeid', hostController.postDeleteHome);
+hostRouter.get('/edit-home/:_id', hostController.getEditHome);
+hostRouter.post('/edit-home/:_id', hostController.postEditHome);
+hostRouter.post('/delete-home/:_id', hostController.postDeleteHome);
 
 exports.hostRouter = hostRouter;

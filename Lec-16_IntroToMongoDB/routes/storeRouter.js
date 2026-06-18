@@ -10,13 +10,13 @@ const homesController= require('../controllers/storeController');
 
 storeRouter.get('/', homesController.getHome);
 
-storeRouter.get('/Homedetails/:homeid', homesController.getHomeDetails);
+storeRouter.get('/Homedetails/:_id', homesController.getHomeDetails);
 
 
 storeRouter.get('/bookings',homesController.getBookings);
-storeRouter.post('/bookings/:homeid',homesController.postBookings);
+storeRouter.post('/bookings/:_id',homesController.postBookings);
 storeRouter.get('/favourites',homesController.getFavourites);
-storeRouter.post('/favourites/:homeid', homesController.AddToFavourites);
-storeRouter.post('/favourites/delete/:homeid', homesController.RemoveFromFavourites);
+storeRouter.post('/favourites/:_id', homesController.AddToFavourites);
+storeRouter.post('/favourites/delete/:_id', homesController.RemoveFromFavourites);
 
 exports.storeRouter = storeRouter;

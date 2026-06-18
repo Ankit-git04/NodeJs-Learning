@@ -5,7 +5,7 @@ require('dotenv').config();
 const mongo_url = process.env.MONGODB_URL;
 
 let _db;
-   console.log("Mongo URL:", mongo_url);
+  
 const mongoClient = (callback)=>{
       MongoClient.connect(mongo_url).then((client)=>{
 

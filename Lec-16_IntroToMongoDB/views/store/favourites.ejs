@@ -36,7 +36,7 @@
               
               <!-- Content Section -->
               <div>
-                <a href="/<%= home.homeid %>" class="hover:text-red-500">
+                <a href="/<%= home._id %>" class="hover:text-red-500">
                   <h3 class="text-lg font-bold text-gray-800 mb-1"><%= home.homeName %></h3>
                 </a>
                 <p class="text-gray-600 text-sm mb-3">📍 <%= home.location %></p>
@@ -47,12 +47,12 @@
                     <p class="text-gray-600 text-sm">From</p>
                     <p class="text-2xl font-bold text-gray-900">$<%= home.price %><span class="text-lg text-gray-600">/night</span></p>
                   </div>
-                  <form action="/bookings/<%= home.homeid %>" method="POST" style="display: inline;">
+                  <form action="/bookings/<%= home._id %>" method="POST" style="display: inline;">
                     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-5 rounded-lg transition transform hover:scale-105">
                       Book Now
                     </button>
                   </form>
-                  <form action="/favourites/delete/<%= home.homeid %>" method="POST" style="display: inline;">
+                  <form action="/favourites/delete/<%= home._id %>" method="POST" style="display: inline;">
                     <button type="submit" class="bg-red-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-5 rounded-lg transition transform hover:scale-105">
                       Remove
                     </button>

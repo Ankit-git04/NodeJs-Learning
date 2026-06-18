@@ -13,8 +13,8 @@ exports.getHome=(req, res, next) => {
 };
 
 exports.getHomeDetails=(req, res, next) => {
-    const homeid = req.params.homeid;
-    Home.fetchById(homeid).then((home) => {
+    const _id = req.params._id;
+    Home.fetchById(_id).then((home) => {
         if (!home) {
             return res.status(404).render('404', { pageTitle: 'Home Not Found' });
         }
@@ -36,8 +36,8 @@ exports.getBookings=(req, res, next) => {
 };
 
 exports.postBookings=(req, res, next) => {
-    const homeid = req.params.homeid;
-     const NewBookedHome = new Bookings(homeid);
+    const _id = req.params._id;
+     const NewBookedHome = new Bookings(_id);
      NewBookedHome.save().then(() => {
         res.redirect('/bookings');
      }).catch(err => {
@@ -63,9 +63,9 @@ exports.getFavourites=(req, res, next) => {
 };  
 
 exports.AddToFavourites = (req, res, next) => {
-    const homeid = req.params.homeid;
+    const _id = req.params._id;
 
-    const NewFavouriteHome = new favourites(homeid);
+    const NewFavouriteHome = new favourites(_id);
 
     NewFavouriteHome.save()
         .then(() => {
@@ -84,8 +84,8 @@ exports.AddToFavourites = (req, res, next) => {
     
 
 exports.RemoveFromFavourites=(req, res, next) => {
-    const homeid = req.params.homeid;
-   favourites.RemoveFromFavourites(homeid).then(() => {
+    const _id = req.params._id;
+   favourites.RemoveFromFavourites(_id).then(() => {
         res.redirect('/favourites');
     }).catch(err => {
         console.error('Error removing from favourites:', err);

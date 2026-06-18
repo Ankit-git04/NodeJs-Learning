@@ -1,13 +1,14 @@
 const {getDb} = require('../utils/database');
+const { ObjectId } = require('mongodb');
 
 module.exports = class favourites {
-  constructor(homeid) {
-    this.homeid = homeid;
+  constructor(_id) {
+    this._id = _id;
   }
   async save() {
       const db= getDb();
-      const homeid= await db.collection('favourites').findOne({ homeid: this.homeid });
-      if(homeid){
+      const _id= await db.collection('favourites').findOne({ _id: this._id });
+      if(_id){
         throw new Error("Home already in favourites");
       }
       else{
@@ -20,17 +21,21 @@ module.exports = class favourites {
 
     const favourites = await db.collection('favourites').find().toArray();
 
-    const homeIds = favourites.map(fav => fav.homeid);
+    const favouriteIds = favourites.map(
+    fav => new ObjectId(fav._id)
+);
 
-    return db.collection('homes').find({ homeid: { $in: homeIds } }).toArray();
+    return db.collection('homes')
+        .find({ _id: { $in: favouriteIds } })
+        .toArray();
 }
    
-  static RemoveFromFavourites(homeid) {
+  static RemoveFromFavourites(_id) {
     const db = getDb();
-    return db.collection('favourites').deleteOne({ homeid: homeid });
+    return db.collection('favourites').deleteOne({ _id: _id });
   }
 
-
+ 
 
 
  
