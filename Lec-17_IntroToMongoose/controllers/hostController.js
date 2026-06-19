@@ -45,10 +45,7 @@ exports.postEditHome=(req, res, next) => {
 exports.postDeleteHome = (req, res, next) => {
   const _id = req.params._id;
 console.log("Deleting:", req.params._id);
- Home.findByIdAndDelete(_id)
-  .then(() => favourites.findByIdAndDelete(_id))
-  .then(() => Bookings.findByIdAndDelete(_id))
-  .then(() => {
+ Home.findByIdAndDelete(_id).then(() => {
       res.redirect('/host');
   }).catch(err => {
     console.error('Error deleting home:', err);
