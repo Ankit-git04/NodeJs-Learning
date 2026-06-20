@@ -1,0 +1,24 @@
+<header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <h1 class="text-3xl font-black text-red-500">airbnb</h1>
+        <nav class="hidden sm:flex gap-6 text-gray-600 font-medium">
+          <a href="/" class="hover:text-gray-900 transition">Home</a>
+          
+          <% if (isLoggedIn) { %>
+            <a href="/bookings" class="hover:text-gray-900 transition">Bookings</a>
+            <a href="/favourites" class="hover:text-gray-900 transition">Favourites</a>
+            <a href="/host" class="hover:text-gray-900 transition">Host Home</a>
+            <a href="/host/add-home" class="hover:text-gray-900 transition">Add Homes</a>
+          <% } %>
+        
+        <% if (isLoggedIn) { %>
+          <form action="/auth/logout" method="POST" class="inline">
+            <button type="submit" class="hover:text-gray-900 transition">Logout</button>
+          </form>
+        <% } else { %>  
+          <a href="/auth/signup" class="hover:text-gray-900 transition">SignUp</a>
+          <a href="/auth/login" class="hover:text-gray-900 transition">login</a>
+        <% } %>
+        </nav>
+      </div>
+    </header>
