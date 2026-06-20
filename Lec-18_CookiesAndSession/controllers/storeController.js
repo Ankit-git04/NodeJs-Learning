@@ -57,7 +57,7 @@ exports.postBookings=(req, res, next) => {
      NewBookedHome.save().then(() => {
         res.redirect('/bookings');
      }).catch(err => {
-           if(err.message === 'Home is already booked') {
+           if(err.code === 11000) {
             return res.send('Home is already booked.');
         }
         console.error('Error booking home:', err);
@@ -103,7 +103,7 @@ exports.AddToFavourites = (req, res, next) => {
             res.redirect('/favourites');
         })
         .catch(err => {
-            if (err.message === 'Home already in favourites') {
+            if (err.code === 11000) {
                 return res.send('Home is already marked as favourite.');
             }
 

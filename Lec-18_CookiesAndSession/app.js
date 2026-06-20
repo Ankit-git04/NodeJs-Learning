@@ -3,6 +3,8 @@ require('dotenv').config();
 
 const express = require("express");
 const path = require('path');
+const session=require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express();
 
@@ -22,7 +24,18 @@ app.use(express.static(path.join(rootDir, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+const store = new MongoDBStore({
+    uri: process.env.MONGO_URI,
+    collection: 'sessions'
+});
 
+app.use(session({
+  secret: 'airbnb_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  // 1 hour
+  store: store
+}));
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
@@ -31,7 +44,7 @@ app.use((req, res, next) => {
 
 app.use((req,res,next)=>{
   console.log('Cookies:', req.get('Cookie'));
-  req.isLoggedIn = req.get('Cookie') && req.get('Cookie').includes('isLoggedIn=true');
+  req.isLoggedIn = req.session.isLoggedIn || false;
   console.log('isLoggedIn:', req.isLoggedIn);
   next();
 });

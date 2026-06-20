@@ -13,18 +13,20 @@ exports.postLogin = (req, res, next) => {
             if (!foundUser) {
                 return res.render('auth/Login', {
                     pageTitle: 'Login',
-                    errorMessage: 'Email not found'
+                    errorMessage: 'Email not found',
+                    isLoggedIn:req.isLoggedIn
                 });
             }
 
             if (foundUser.password !== password) {
                 return res.render('auth/Login', {
                     pageTitle: 'Login',
-                    errorMessage: 'Incorrect password'
+                    errorMessage: 'Incorrect password',
+                    isLoggedIn:req.isLoggedIn
                 });
             }
             console.log('Login successful for user:', foundUser.username);
-          res.cookie('isLoggedIn', 'true');
+          req.session.isLoggedIn = true;
             res.redirect('/');
         })
         .catch(err => {
@@ -59,8 +61,11 @@ exports.postSignUp = (req, res, next) => {
     });
 };
 
-exports.getLogout = (req, res, next) => {
-  res.clearCookie('isLoggedIn');
-  res.redirect('/');
+exports.postLogout = (req, res, next) => {
+
+  req.session.destroy(()=>{
+     res.redirect('/');
+  }) ; 
+ 
 }
  
