@@ -16,6 +16,7 @@ const {hostRouter} = require('./routes/hostRouter');
 const {authRouter}= require('./routes/authRouter');
 const rootDir = require('./utils/pathutils');
 const {mongoClient} = require('./utils/database');
+const User = require('./models/User');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -38,23 +39,44 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
+    if (!req.session.userId) {
+        return next();
+    }
+
+    User.findById(req.session.userId)
+        .then(user => {
+            req.user = user;
+            res.locals.user = user || null;
+            console.log(req.user);
+            next();
+        })
+        .catch(err => console.log(err));
+});
+
+app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   next();
 });
 
 app.use((req,res,next)=>{
-  console.log('Cookies:', req.get('Cookie'));
+
   req.isLoggedIn = req.session.isLoggedIn || false;
+  res.locals.isLoggedIn = req.isLoggedIn;
+  res.locals.user = req.user || null;
   console.log('isLoggedIn:', req.isLoggedIn);
   next();
 });
 
-app.use('/host',(req,res,next)=>{
-  if(req.isLoggedIn) {
+app.use('/host', (req, res, next) => {
+    if (!req.isLoggedIn) {
+        return res.redirect('/auth/login');
+    }
+
+    if (!req.user || req.user.userType !== 'host') {
+        return res.redirect('/');
+    }
+
     next();
-  } else {
-   return res.redirect('/auth/login');
-  }
 });
 
 app.use( storeRouter);

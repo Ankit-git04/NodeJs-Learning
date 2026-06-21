@@ -1,12 +1,12 @@
 const {registeredHomes} = require('../models/home');
 const Home = require('../models/home');
-const Bookings= require('../models/bookings');
-const favourites = require('../models/favourites');
+
+const User = require('../models/User');
 
 
 exports.getHome=(req, res, next) => {
     Home.find().then((homes) => {
-        res.render('store/home-list', { registeredHomes: homes, pageTitle: 'Home List', isLoggedIn: req.isLoggedIn });
+        res.render('store/home-list', { registeredHomes: homes, pageTitle: 'Home List', isLoggedIn: req.isLoggedIn,user: req.user });
     }).catch(err => {
         console.error('Error fetching homes:', err);      
     }); 
@@ -26,60 +26,51 @@ exports.getHomeDetails=(req, res, next) => {
 };
 
 exports.getBookings = (req, res, next) => {
-  Bookings.find()
-    .then((bookings) => {
+  const user = req.user;
+  if (!user) {
+    return res.status(401).render('401', { pageTitle: 'Unauthorized', isLoggedIn: req.isLoggedIn });
+  }
 
-      const ids = bookings.map(booking => booking._id);
-
-      return Home.find({
-        _id: { $in: ids }
-      });
-
-    })
-    .then((bookedHomes) => {
+  User.findById(user._id)
+    .populate('bookings')
+    .then((user) => {
       res.render('store/bookings', {
-        bookings: bookedHomes,
+        bookings: user.bookings,
         pageTitle: 'Bookings',
-         isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.isLoggedIn,
       });
     })
     .catch(err => {
       console.error('Error fetching bookings:', err);
       res.status(500).render('500', {
-        pageTitle: 'Internal Server Error', isLoggedIn: req.isLoggedIn
+        pageTitle: 'Internal Server Error',
+        isLoggedIn: req.isLoggedIn
       });
     });
 };
 
 exports.postBookings=(req, res, next) => {
     const _id = req.params._id;
-     const NewBookedHome = new Bookings( {_id});
-     NewBookedHome.save().then(() => {
+    const user=req.user;
+    if (!user) {
+        return res.status(401).render('401', { pageTitle: 'Unauthorized', isLoggedIn: req.isLoggedIn });
+    }
+    user.bookings.push(_id);
+    user.save().then(() => {
         res.redirect('/bookings');
-     }).catch(err => {
-           if(err.code === 11000) {
-            return res.send('Home is already booked.');
-        }
-        console.error('Error booking home:', err);
+    }).catch(err => {
+        console.error('Error adding to bookings:', err);
         res.status(500).render('500', { pageTitle: 'Internal Server Error', isLoggedIn: req.isLoggedIn });
-        
-     });
- 
+    });
+   
 };
 
 exports.getFavourites = (req, res, next) => {
-    favourites.find()
-        .then((favouriteHomesIds) => {
-
-            const ids = favouriteHomesIds.map(fav => fav._id);
-
-            return Home.find({
-                _id: { $in: ids }
-            });
-        })
-        .then((favouriteHomes) => {
+    User.findById(req.user._id)
+        .populate('favourites')
+        .then((user) => {
             res.render('store/favourites', {
-                favouriteHomes,
+                favouriteHomes: user.favourites,
                 pageTitle: 'Favourites', 
                 isLoggedIn: req.isLoggedIn
             });
@@ -95,31 +86,38 @@ exports.getFavourites = (req, res, next) => {
 
 exports.AddToFavourites = (req, res, next) => {
     const _id = req.params._id;
+    const user=req.user;
+    if (!user) {
+        return res.status(401).render('401', { pageTitle: 'Unauthorized', isLoggedIn: req.isLoggedIn });
+    }
+        if (user.favourites.includes(_id)) {
+            return res.send('Home is already marked as favourite.');
+        }
 
-    const NewFavouriteHome = new favourites({_id});
-
-    NewFavouriteHome.save()
-        .then(() => {
-            res.redirect('/favourites');
-        })
-        .catch(err => {
-            if (err.code === 11000) {
-                return res.send('Home is already marked as favourite.');
-            }
-
-            console.error(err);
-            res.status(500).render('500', {isLoggedIn: req.isLoggedIn});
-        });
+    
+    user.favourites.push(_id);
+    user.save().then(() => {
+        res.redirect('/favourites');
+    }).catch(err => {
+        console.error('Error adding to favourites:', err);
+        res.status(500).render('500', { pageTitle: 'Internal Server Error', isLoggedIn: req.isLoggedIn });
+    });
+    
 };
     
     
 
 exports.RemoveFromFavourites=(req, res, next) => {
     const _id = req.params._id;
-   favourites.findByIdAndDelete(_id).then(() => {
+    const user=req.user;
+    if (!user) {
+        return res.status(401).render('401', { pageTitle: 'Unauthorized', isLoggedIn: req.isLoggedIn });
+    }
+    user.favourites.pull(_id);
+    user.save().then(() => {
         res.redirect('/favourites');
     }).catch(err => {
         console.error('Error removing from favourites:', err);
-        res.status(500).render('500', { pageTitle: 'Internal Server Error' , isLoggedIn: req.isLoggedIn});
+        res.status(500).render('500', { pageTitle: 'Internal Server Error', isLoggedIn: req.isLoggedIn });
     });
 };      

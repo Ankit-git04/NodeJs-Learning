@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const favourites = require('./favourites');
 const Bookings = require('./bookings');
 
+
 const homeSchema = new mongoose.Schema({
     homeName: {
         type: String,
@@ -22,10 +23,19 @@ const homeSchema = new mongoose.Schema({
 }); 
 
 homeSchema.post('findOneAndDelete', async function(doc) {
-  if (!doc) return;
+    if (!doc) return;
 
-  await favourites.deleteMany({ _id: doc._id });
-  await Bookings.deleteMany({ _id: doc._id });
+    const User = mongoose.model('user');
+
+    await User.updateMany(
+        {},
+        {
+            $pull: {
+                favourites: doc._id,
+                bookings: doc._id
+            }
+        }
+    );
 });
 
 const Home = mongoose.model('Home', homeSchema);

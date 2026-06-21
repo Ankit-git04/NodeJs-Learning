@@ -1,7 +1,7 @@
 const {registeredHomes} = require('../models/home');
 const Home = require('../models/home');
-const Bookings= require('../models/bookings');
-const favourites = require('../models/favourites');
+
+
 
 
 exports.getAddHome=(req, res, next) => {
@@ -22,6 +22,7 @@ exports.getHostHome=(req, res, next) => {
   
 exports.getEditHome=(req, res, next) => {
   const _id = req.params._id;
+
   Home.findById(_id).then((home) => {
     if (!home) {
         return res.status(404).render('404', { pageTitle: 'Home Not Found' });
