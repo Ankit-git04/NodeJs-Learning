@@ -25,7 +25,7 @@ const homeSchema = new mongoose.Schema({
 homeSchema.post('findOneAndDelete', async function(doc) {
     if (!doc) return;
 
-    const User = mongoose.model('user');
+    const User = mongoose.model('User');
 
     await User.updateMany(
         {},
