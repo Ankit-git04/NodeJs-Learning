@@ -1,0 +1,28 @@
+<%- include('../partials/head', { pageTitle: 'Host Bookings' }) %>
+</head>
+<body>
+
+<%- include('../partials/Navbar') %>
+
+<h1>Host Bookings</h1>
+
+<% bookings.forEach(booking => { %>
+
+    <h3><%= booking.homeId.homeName %></h3>
+
+    <p>Guest: <%= booking.userId.username %></p>
+
+    <p>Email: <%= booking.userId.email %></p>
+
+    <p>Check In: <%= booking.checkInDate.toDateString() %></p>
+
+    <p>Check Out: <%= booking.checkOutDate.toDateString() %></p>
+
+    <p>Total: $<%= booking.totalPrice %></p>
+
+    <hr>
+
+<% }) %>
+
+</body>
+</html>
