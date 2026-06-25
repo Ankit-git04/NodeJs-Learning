@@ -92,7 +92,7 @@ exports.postBookings = async (req, res, next) => {
                 checkInDate: { $lt: checkOut },
                 checkOutDate: { $gt: checkIn }
             });
-
+        
             if (conflictingBooking) {
                 return res.status(400).send(
                     'This property is already booked for the selected dates.'
