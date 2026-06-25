@@ -2,6 +2,7 @@ const {registeredHomes} = require('../models/home');
 const Home = require('../models/home');
 const Bookings = require('../models/bookings');
 const User = require('../models/User');
+const Fuse = require('fuse.js');
 
 
 exports.getHome=(req, res, next) => {
@@ -84,6 +85,19 @@ exports.postBookings = async (req, res, next) => {
 
         const home = await Home.findById(homeId).populate('hostId');
         if (!home) return res.status(404).send('Home not found');
+
+        // Check if selected dates overlap an existing booking
+            const conflictingBooking = await Bookings.findOne({
+                homeId: home._id,
+                checkInDate: { $lt: checkOut },
+                checkOutDate: { $gt: checkIn }
+            });
+
+            if (conflictingBooking) {
+                return res.status(400).send(
+                    'This property is already booked for the selected dates.'
+                );
+            }
 
         const guests = parseInt(numberOfPeople) || 1;
 
@@ -183,4 +197,55 @@ exports.RemoveFromFavourites=(req, res, next) => {
         console.error('Error removing from favourites:', err);
         res.status(500).render('500', { pageTitle: 'Internal Server Error', isLoggedIn: req.isLoggedIn });
     });
-};      
+};   
+
+ exports.getSearchResults = async (req, res, next) => {
+  try {
+    const requiredLocation = req.query.requiredLocation?.trim() || '';
+
+    let homes = await Home.find({
+      location: {
+        $regex: requiredLocation,
+        $options: 'i'
+      }
+    });
+
+    let displayLocation = requiredLocation;
+
+    if (homes.length === 0 && requiredLocation) {
+
+      const allHomes = await Home.find().lean();
+
+      const fuse = new Fuse(allHomes, {
+        keys: ['location'],
+        threshold: 0.3
+      });
+
+      const results = fuse.search(requiredLocation);
+
+      homes = results.map(result => result.item);
+
+      
+    }
+    if (homes.length > 0) {
+        displayLocation = homes[0].location;
+      }
+  console.log(displayLocation);
+    res.render('store/search-results', {
+      homes,
+      requiredLocation,
+      displayLocation,
+      pageTitle: 'Search Results',
+      isLoggedIn: req.isLoggedIn,
+      user: req.user
+    });
+
+  } catch (err) {
+    console.error('Error fetching search results:', err);
+
+    res.status(500).render('500', {
+      pageTitle: 'Internal Server Error',
+      isLoggedIn: req.isLoggedIn
+    });
+  }
+};

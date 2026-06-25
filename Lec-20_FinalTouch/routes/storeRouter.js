@@ -23,5 +23,6 @@ storeRouter.post('/bookings/:_id',isAuth,homesController.postBookings);
 storeRouter.get('/favourites',isAuth,homesController.getFavourites);
 storeRouter.post('/favourites/:_id',isAuth, homesController.AddToFavourites);
 storeRouter.post('/favourites/delete/:_id',isAuth, homesController.RemoveFromFavourites);
+storeRouter.get('/search', homesController.getSearchResults);
 
 exports.storeRouter = storeRouter;
