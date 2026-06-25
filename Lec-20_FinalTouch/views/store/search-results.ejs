@@ -36,7 +36,7 @@
                   </div>
                   <div class="flex items-center justify-between gap-4">
                     <p class="text-xl font-bold text-red-600">$<%= home.price %></p>
-                    <form action="/bookings/form/<%= home._id %>" method="POST" class="min-w-[120px]">
+                    <form action="/bookings/form/<%= home._id %>" method="GET" class="min-w-[120px]">
                       <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-full transition">Book Now</button>
                     </form>
                   </div>

@@ -94,9 +94,11 @@ exports.postBookings = async (req, res, next) => {
             });
         
             if (conflictingBooking) {
-                return res.status(400).send(
-                    'This property is already booked for the selected dates.'
-                );
+
+               req.session.message = 'already-booked';
+
+             return res.redirect(req.get('referer') || '/');
+              
             }
 
         const guests = parseInt(numberOfPeople) || 1;
@@ -168,7 +170,11 @@ exports.AddToFavourites = (req, res, next) => {
         return res.status(401).render('401', { pageTitle: 'Unauthorized', isLoggedIn: req.isLoggedIn });
     }
         if (user.favourites.includes(_id)) {
-            return res.send('Home is already marked as favourite.');
+            console.log("REFERER =", req.get('referer'));
+         req.session.message = 'already-favourite';
+
+             return res.redirect(req.get('referer') || '/');
+              
         }
 
     

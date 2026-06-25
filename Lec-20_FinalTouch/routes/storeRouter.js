@@ -17,7 +17,7 @@ storeRouter.get('/', homesController.getHome);
 
 storeRouter.get('/Homedetails/:_id',isAuth, homesController.getHomeDetails);
 
-storeRouter.post('/bookings/form/:_id',isAuth, homesController.getBookingForm);
+storeRouter.get('/bookings/form/:_id',isAuth, homesController.getBookingForm);
 storeRouter.get('/bookings',isAuth,homesController.getBookings);
 storeRouter.post('/bookings/:_id',isAuth,homesController.postBookings);
 storeRouter.get('/favourites',isAuth,homesController.getFavourites);

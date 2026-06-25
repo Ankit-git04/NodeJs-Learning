@@ -78,6 +78,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+    res.locals.message = req.session.message || null;
+
+    delete req.session.message;
+
+    next();
+});
+
 app.use((req,res,next)=>{
 
   req.isLoggedIn = req.session.isLoggedIn || false;
